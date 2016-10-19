@@ -8,11 +8,13 @@ Package.describe({
 Package.onUse(function(api) {
     api.versionsFrom('METEOR@1.0');
 
+    api.use("fourseven:scss@3.2.0", client);
+
     api.use('jquery');
     api.use('twbs:bootstrap@3.3.2'); // Need this for the glyphicons
 
     api.addFiles('lib/context.js','client');
-    api.addFiles('lib/context.css','client');
+    api.addFiles('lib/context.scss','client');
 
     api.export('context', 'client');
 });
