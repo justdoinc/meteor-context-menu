@@ -207,6 +207,11 @@
     right: 9px;
 }
 
+.dropdown-context-sub {
+    max-height: 320px;
+    overflow: auto;
+}
+
 .dropdown-context-sub:before, .dropdown-context-sub:after {
     display: none;
 }
