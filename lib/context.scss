@@ -15,22 +15,12 @@
     margin: 2px 0 0;
     list-style: none;
     background-color: #ffffff;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
-    *border-right-width: 2px;
-    *border-bottom-width: 2px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
     border-radius: 6px;
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding;
     background-clip: padding-box;
     text-align:left;
+    overflow: visible;
 
     &.pull-right {
         right: 0;
@@ -121,9 +111,8 @@
         left: 100%;
         margin-top: -6px;
         margin-left: -1px;
-        -webkit-border-radius: 0 6px 6px 6px;
-        -moz-border-radius: 0 6px 6px 6px;
         border-radius: 0 6px 6px 6px;
+        overflow: auto;
     }
     .dropdown-submenu > .dropdown-menu.drop-left{
         left:-100%;
