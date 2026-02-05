@@ -115,7 +115,8 @@
         overflow: auto;
     }
     .dropdown-submenu > .dropdown-menu.drop-left{
-        left:-100%;
+        left: auto;
+        right: 100%;
     }
     .dropdown-submenu:hover .dropdown-menu {
         display: block;
@@ -249,8 +250,8 @@
             border-radius: 6px 0 6px 6px;
         }
         .dropdown-submenu > .dropdown-menu.drop-left{
-            left: unset;
-            right: -100%;
+            right: auto;
+            left: 100%;
         }
         .dropdown-submenu > a:after {
             float: left;
