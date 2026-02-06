@@ -243,6 +243,7 @@
             right: auto;
         }
         .dropdown-submenu > .dropdown-menu {
+            // In RTL, submenus open to the LEFT by default
             left: unset;
             right: 100%;
             margin-left: unset;
@@ -250,20 +251,22 @@
             border-radius: 6px 0 6px 6px;
         }
         .dropdown-submenu > .dropdown-menu.drop-left{
+            // When flipped (collision with left edge), open to the RIGHT instead
             right: auto;
             left: 100%;
         }
+        // RTL caret points LEFT (matching the submenu opening direction)
         .dropdown-submenu > a:after {
             float: left;
             margin-right: unset;
             margin-left: -10px;
-            border-left-color: unset;
+            border-color: transparent;
             border-right-color: #cccccc;
+            border-style: solid;
             border-width: 5px 5px 5px 0;
             content: " ";
         }
         .dropdown-submenu:hover > a:after {
-            border-left-color: unset;
             border-right-color: #ffffff;
         }
     }
