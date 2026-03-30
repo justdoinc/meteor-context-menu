@@ -8,6 +8,7 @@ TestManifest?.register "meteor-context-menu",
         "Meteor Context Menu Mobile Positioning"
         "Meteor Context Menu Submenu Collision Handling"
         "Meteor Context Menu Scroll Binding"
+        "Meteor Context Menu Grid Header Desktop"
       ]
       primary: true
     }
