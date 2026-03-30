@@ -202,19 +202,8 @@ Current behavior when `APP.justdo_i18n.isRtl()` returns `true`:
 | `context.attach(selector, config)` | Bind a context menu to matching elements |
 | `context.buildMenu(data, id, subMenu)` | Build a menu DOM tree without attaching handlers |
 | `context.destroy(selector)` | Remove the `contextmenu` handler from the selector |
-| `context.bindScrollContainer(menuId, $scrollContainer, onScroll)` | Attach horizontal scroll tracking to an already-visible dropdown |
 | `context.clearScrollBinding()` | Remove the current active scroll binding |
 | `context.CONSTANTS` | Exposes shared positioning and fade constants |
-
-## Manual Scroll Binding
-
-Use `context.bindScrollContainer(...)` when a menu is shown outside the standard `context.attach(...)` flow and you still want it to follow a horizontal scroll container.
-
-```js
-context.bindScrollContainer('grid-column-actions', $('.slick-viewport'), function () {
-  return true;
-});
-```
 
 `context.clearScrollBinding()` removes the currently active binding and is safe to call during teardown.
 
