@@ -5,6 +5,7 @@ restore_stack = []
 active_nodes = []
 jquery_restore = null
 unique_id_counter = 0
+context_initialized = false
 
 pushRestore = (fn) ->
   restore_stack.push fn
@@ -311,46 +312,55 @@ installJqueryHarness = ->
       $.fn[method_name] = method
     return
 
-before ->
-  context = Package["jchristman:context-menu"]?.context or window.context
-  expect(context?.init).to.be.a "function"
-  jquery_restore = installJqueryHarness()
-  context.init
-    fadeSpeed: 0
-    preventDoubleContext: false
-  return
+registerSharedHarness = ->
+  before ->
+    context = Package["jchristman:context-menu"]?.context or window.context
+    expect(context?.init).to.be.a "function"
+    jquery_restore = installJqueryHarness()
 
-beforeEach ->
-  context.settings
-    fadeSpeed: 0
-    filter: ($obj) -> return
-    above: "auto"
-    left: "auto"
-    preventDoubleContext: false
-    compress: false
+    unless context_initialized
+      context.init
+        fadeSpeed: 0
+        preventDoubleContext: false
+      context_initialized = true
+    return
 
-  setHtmlMetrics
-    width: 400
-    height: 240
-  return
+  beforeEach ->
+    context.settings
+      fadeSpeed: 0
+      filter: ($obj) -> return
+      above: "auto"
+      left: "auto"
+      preventDoubleContext: false
+      compress: false
 
-afterEach ->
-  context.clearScrollBinding()
-  $(".dropdown-context").remove()
+    setHtmlMetrics
+      width: 400
+      height: 240
+    return
 
-  while active_nodes.length > 0
-    node = active_nodes.pop()
-    node.parentNode?.removeChild node
+  afterEach ->
+    context.clearScrollBinding()
+    $(".dropdown-context").remove()
 
-  while restore_stack.length > 0
-    restore_stack.pop()()
-  return
+    while active_nodes.length > 0
+      node = active_nodes.pop()
+      node.parentNode?.removeChild node
 
-after ->
-  jquery_restore?()
+    while restore_stack.length > 0
+      restore_stack.pop()()
+    return
+
+  after ->
+    jquery_restore?()
+    jquery_restore = null
+    return
+
   return
 
 describe "Meteor Context Menu Mobile Positioning", ->
+  registerSharedHarness()
+
   it "should fall back to desktop overflow positioning when APP.justdo_pwa is absent", ->
     target = createTarget
       left: 36
@@ -445,6 +455,8 @@ describe "Meteor Context Menu Mobile Positioning", ->
     return
 
 describe "Meteor Context Menu Submenu Collision Handling", ->
+  registerSharedHarness()
+
   it "should add drop-left for a mobile LTR submenu when the left side has more free space", ->
     {$submenu} = buildSubmenuHarness
       mobileLayout: true
@@ -506,6 +518,8 @@ describe "Meteor Context Menu Submenu Collision Handling", ->
     return
 
 describe "Meteor Context Menu Scroll Binding", ->
+  registerSharedHarness()
+
   it "should move the dropdown by the scroll delta when scrollContainer is provided through context.attach", ->
     target = createTarget
       left: 30
