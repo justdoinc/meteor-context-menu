@@ -103,3 +103,31 @@ Other Options
 =============
 
 For other options, see the documentation at http://lab.jakiestfu.com/contextjs/. There is very little different about this library.
+
+JustDo Additions
+================
+
+Context menus can opt in to keyboard navigation:
+
+```js
+context.attach($target, {
+    id: "MY-MENU",
+    data: menuItems,
+    keyboardNavigation: true
+});
+```
+
+When enabled, ArrowDown and ArrowUp highlight visible action rows, skipping
+headers, dividers, disabled rows, hidden rows, and non-action labels. Enter
+activates the highlighted row through the same `mousedown` action path used by
+mouse selection. Escape closes the visible context menu. Tab is left to normal
+browser focus handling.
+
+Menus emit `context-menu-hidden` after framework-controlled hiding and reset.
+The event receives a details object with a `reason` value such as
+`"escape"`, `"outside-click"`, `"scroll-out-of-view"`, or
+`"new-context-menu"`.
+
+The first JustDo consumer is the grid header Add Column search in
+`grid-control`. Keep keyboard navigation opt-in per menu until each searchable
+context-menu flow has its own product acceptance coverage.
